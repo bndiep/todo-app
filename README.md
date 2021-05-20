@@ -3,6 +3,7 @@ It's finally my turn to build my own todo app. While I know that many people on 
 
 ## Resouces
 [Beginning our React todo list](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning)
+[Nano ID](https://yarnpkg.com/package/nanoid)
 
 ## User Stories
 - As a user, I can see a list of tasks.
