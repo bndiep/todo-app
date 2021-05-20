@@ -11,6 +11,13 @@ It's finally my turn to build my own todo app. While I know that many people on 
 - As a user, I can delete any task.
 - As a user, I can edit a task.
 - As a user, I can view a subtask: all tasks, only active tasks, or only completed tasks.
+
+## Accessibility Notes
+- `aria-pressed`: assistive tech that the button element can be in either two states (i.e. pressed or unpressed)
+- `visually-hidden`: an added className that will make elements in this class be hidden from sighted users but still available for screen reader users once styling is added
+- `role`: helps assistive tech know what kind of element a tag is
+- `aria-labelledby`: provides a label with more informative context as to what the purpose of the element is
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
