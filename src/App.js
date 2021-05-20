@@ -5,8 +5,19 @@ import FilterButton from './components/FilterButton'
 import Form from './components/Form'
 import Todo from './components/Todo'
 
+// each filter should have a unique name and behavior
+const FILTER_MAP = {
+  All: () => true,
+  Active: task => !task.completed,
+  Completed: task => task.completed
+}
+
+// returns an array of the keys from FILTER_MAP
+const FILTER_NAMES = Object.keys(FILTER_MAP)
+
 const App = ({tasks}) => {
   const [allTasks, setAllTasks] = useState(tasks)
+  const [filter, setFilter] = useState('All')
 
   const addTask = (name) => {
     // using nanaoid to generate unique IDs for each new task
@@ -44,7 +55,10 @@ const App = ({tasks}) => {
     setAllTasks(updatedTasks)
   }
 
-  const taskList = allTasks.map(task => {
+  // want to filter over tasks that match the FILTER_MAP key
+  const taskList = allTasks
+    .filter(FILTER_MAP[filter])
+    .map(task => {
     return (
       <Todo
         id={task.id}
@@ -57,6 +71,17 @@ const App = ({tasks}) => {
       />
     )
   })
+
+  const filterList = FILTER_NAMES.map(name => {
+    return(
+      <FilterButton 
+        key={name}
+        name={name} 
+        isPressed={name === filter}
+        setFilter={setFilter}
+      />
+    )
+  })
   
   const taskNoun = taskList.length !== 1 ? 'tasks' : 'task'
   const headingText =  `${taskList.length} ${taskNoun} remaining`
@@ -66,9 +91,7 @@ const App = ({tasks}) => {
       <h1>TodoMatic</h1>
         <Form addTask={addTask} />
       <div className="filters btn-group stack-exception">
-        <FilterButton />
-        <FilterButton />
-        <FilterButton />
+        {filterList}
       </div>
       <h2 id="list-heading">
         {headingText}
