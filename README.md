@@ -1,3 +1,16 @@
+# Building my first Todo App
+It's finally my turn to build my own todo app. While I know that many people on GitHub have created the same project, I think it will be great exercise and the project itself can showcase my knowledge of React. The goal is to first create simple functionality and with each iteraction, add more complex features.
+
+## Resouces
+[Beginning our React todo list](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning)
+
+## User Stories
+- As a user, I can see a list of tasks.
+- As a user, I can add a task.
+- As a user, I can mark at task as complete.
+- As a user, I can delete any task.
+- As a user, I can edit a task.
+- As a user, I can view a subtask: all tasks, only active tasks, or only completed tasks.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
