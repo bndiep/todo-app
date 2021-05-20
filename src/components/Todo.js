@@ -1,4 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
 
 const Todo = ({
   completed,
@@ -8,9 +16,13 @@ const Todo = ({
   name,
   toggleTaskCompleted,
 }) => {
-  
   const [isEditing, setEditing] = useState(false)
   const [newName, setNewName] = useState('')
+  // useRef is a hook that creates an object with a single property: current
+  // can be used as a reference
+  const editFieldRef = useRef(null)
+  const editButtonRef = useRef(null)
+  const wasEditing = usePrevious(isEditing)
 
   const handleChange = (e) => {
     setNewName(e.target.value)
@@ -35,6 +47,7 @@ const Todo = ({
           type='text'
           value={newName}
           onChange={handleChange}
+          ref={editFieldRef}
         />
       </div>
       <div className='btn-group'>
@@ -75,6 +88,7 @@ const Todo = ({
             type='button'
             className='btn'
             onClick={() => setEditing(true)}
+            ref={editButtonRef}
           >
             Edit <span className='visually-hidden'>{name}</span>
           </button>
@@ -89,6 +103,17 @@ const Todo = ({
     </div>
   )
   
+  // looks at the previous value of isEditing when it was changed
+  useEffect(() => {
+    if (!wasEditing && isEditing) {
+      // looks are current value of editFieldRef and focuses on that element it references
+      editFieldRef.current.focus()
+    } 
+    if (wasEditing && !isEditing) {
+      editButtonRef.current.focus()
+    }
+  }, [wasEditing, isEditing])
+
   return(
     <li className='todo'>
       {isEditing ? editingTemplate : viewTemplate}
