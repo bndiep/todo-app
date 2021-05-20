@@ -21,6 +21,17 @@ const App = ({tasks}) => {
     setAllTasks(remainingTasks)
   }
 
+  const editTask = (id, newName) => {
+    // use map to look for task with same id and update the name of task
+    const editedTaskList = tasks.map(task => {
+      if (id === task.id) {
+        return {...task, name: newName}
+      }
+      return task
+    })
+    setAllTasks(editedTaskList)
+  }
+
   const toggleTaskCompleted = (id) => {
     const updatedTasks = tasks.map(task => {
       // check to see if the task (from tasks) has the same id as the edited task
@@ -42,6 +53,7 @@ const App = ({tasks}) => {
         key={task.id}
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
+        editTask={editTask}
       />
     )
   })

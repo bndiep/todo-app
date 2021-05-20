@@ -2,8 +2,8 @@
 It's finally my turn to build my own todo app. While I know that many people on GitHub have created the same project, I think it will be great exercise and the project itself can showcase my knowledge of React. The goal is to first create simple functionality and with each iteraction, add more complex features.
 
 ## Resouces
-[Beginning our React todo list](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning)
-[Nano ID](https://yarnpkg.com/package/nanoid)
+- [Beginning our React todo list](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks/React_todo_list_beginning)
+- [Nano ID](https://yarnpkg.com/package/nanoid)
 
 ## User Stories
 - As a user, I can see a list of tasks.
