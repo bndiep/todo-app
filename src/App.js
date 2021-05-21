@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
+import { usePrevious } from './helpers'
 
 import FilterButton from './components/FilterButton'
 import Form from './components/Form'
 import Todo from './components/Todo'
-import { usePrevious } from './helpers'
 
 // each filter should have a unique name and behavior
 const FILTER_MAP = {
@@ -19,6 +19,18 @@ const App = ({tasks}) => {
   const [allTasks, setAllTasks] = useState(tasks)
   const [filter, setFilter] = useState('All')
 
+  const toggleTaskCompleted = (id) => {
+    const updatedTasks = tasks.map(task => {
+      // check to see if the task (from tasks) has the same id as the edited task
+      if (id === task.id) {
+        // make a new object that reverses the completed prop
+        return {...task, completed: !task.completed}
+      }
+      return task
+    })
+    setAllTasks(updatedTasks)
+  }
+
   const addTask = (name) => {
     // using nanaoid to generate unique IDs for each new task
     const newTask = { id: "todo-" + nanoid(), name: name, completed: false }
@@ -28,7 +40,7 @@ const App = ({tasks}) => {
   
   const deleteTask = (id) => {
     // use filter to go through the array to look for tasks that do not have the passed id
-    const remainingTasks = tasks.filter(task => task.id !== id)
+    const remainingTasks = tasks.filter(task => id !== task.id)
     setAllTasks(remainingTasks)
   }
 
@@ -41,18 +53,6 @@ const App = ({tasks}) => {
       return task
     })
     setAllTasks(editedTaskList)
-  }
-
-  const toggleTaskCompleted = (id) => {
-    const updatedTasks = tasks.map(task => {
-      // check to see if the task (from tasks) has the same id as the edited task
-      if (id === task.id) {
-        // make a new object that reverses the completed prop
-        return {...task, completed: !task.completed}
-      }
-      return task
-    })
-    setAllTasks(updatedTasks)
   }
 
   // want to filter over tasks that match the FILTER_MAP key
@@ -95,7 +95,7 @@ const App = ({tasks}) => {
       listHeadingRef.current.focus()
     }
   }, [tasks.length, prevTaskLength])
-  
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>

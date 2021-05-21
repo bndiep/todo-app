@@ -7,7 +7,7 @@ const Todo = ({
   id,
   name,
   toggleTaskCompleted,
-  usePrevious
+  usePrevious,
 }) => {
   const [isEditing, setEditing] = useState(false)
   const [newName, setNewName] = useState('')
@@ -23,6 +23,9 @@ const Todo = ({
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (name === '') {
+      return
+    }
     editTask(id, newName)
     setNewName('')
     setEditing(false)
@@ -38,7 +41,7 @@ const Todo = ({
           id={id} 
           className='todo-text'
           type='text'
-          value={newName}
+          value={newName || name}
           onChange={handleChange}
           ref={editFieldRef}
         />

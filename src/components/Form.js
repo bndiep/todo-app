@@ -8,11 +8,11 @@ const Form = ({addTask}) => {
   }
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     // guard to disallow empty tasks from being added
     if (name === '') {
       return
     }
-    e.preventDefault()
     addTask(name)
     setName('')
   }
