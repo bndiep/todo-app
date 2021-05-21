@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { nanoid } from 'nanoid'
 
 import FilterButton from './components/FilterButton'
 import Form from './components/Form'
 import Todo from './components/Todo'
+import { usePrevious } from './helpers'
 
 // each filter should have a unique name and behavior
 const FILTER_MAP = {
@@ -11,7 +12,6 @@ const FILTER_MAP = {
   Active: task => !task.completed,
   Completed: task => task.completed
 }
-
 // returns an array of the keys from FILTER_MAP
 const FILTER_NAMES = Object.keys(FILTER_MAP)
 
@@ -68,6 +68,7 @@ const App = ({tasks}) => {
         toggleTaskCompleted={toggleTaskCompleted}
         deleteTask={deleteTask}
         editTask={editTask}
+        usePrevious={usePrevious}
       />
     )
   })
@@ -86,6 +87,9 @@ const App = ({tasks}) => {
   const taskNoun = taskList.length !== 1 ? 'tasks' : 'task'
   const headingText =  `${taskList.length} ${taskNoun} remaining`
 
+  const listHeadingRef = useRef(null)
+  const prevTaskLength = usePrevious(tasks.length)
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -93,7 +97,8 @@ const App = ({tasks}) => {
       <div className="filters btn-group stack-exception">
         {filterList}
       </div>
-      <h2 id="list-heading">
+      {/* tabIndex added because h2 elements are not focusable */}
+      <h2 id="list-heading" tabIndex='-1' ref={listHeadingRef}>
         {headingText}
       </h2>
       <ul

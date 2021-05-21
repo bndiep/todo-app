@@ -18,7 +18,7 @@ It's finally my turn to build my own todo app. While I know that many people on 
 - `visually-hidden`: an added className that will make elements in this class be hidden from sighted users but still available for screen reader users once styling is added
 - `role`: helps assistive tech know what kind of element a tag is
 - `aria-labelledby`: provides a label with more informative context as to what the purpose of the element is
-
+- `tabIndex`: attribute for accessibility edge cases (in which case an element is not focusable); should not be overused and should consider using elements that are focusable (e.g. button, a, input...)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

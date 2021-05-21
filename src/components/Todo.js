@@ -1,13 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
 const Todo = ({
   completed,
   deleteTask,
@@ -15,6 +7,7 @@ const Todo = ({
   id,
   name,
   toggleTaskCompleted,
+  usePrevious
 }) => {
   const [isEditing, setEditing] = useState(false)
   const [newName, setNewName] = useState('')
